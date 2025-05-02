@@ -1,0 +1,41 @@
+*{
+  box-sizing: border-box;
+}
+
+.error{
+    color: red;
+    font-size: 10px;
+    padding: 3px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.active {
+  font-weight: bold;
+  color: red;
+}
+
+.noPaddingDropdown .dropdown-toggle{
+  padding-top: 0 ;
+  padding-bottom: 0 ;
+  padding-left: 0 ;
+  padding-right: 0 ;
+  background-color: transparent;
+  border: none;
+}
+
+.active-link {
+  font-weight: bold;
+  color: #0d6efd; /* Bootstrap primary color or your custom */
+  border-bottom: 2px solid #0d6efd;
+}
