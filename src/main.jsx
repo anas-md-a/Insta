@@ -1,3 +1,13 @@
+// Fix for "global is not defined" error in the browser
+// if (typeof global === "undefined") {
+//   var global = window;
+// }
+import { Buffer } from 'buffer';
+
+window.global = window;
+window.process = { env: { DEBUG: undefined } };
+window.Buffer = Buffer;
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -8,13 +18,14 @@ import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import { BrowserRouter, NavLink, Route,  Router,  Routes } from 'react-router-dom'
 import NoFeed from './pages/NoFeed.jsx'
-import SearchResult from './pages/searchResult.jsx'
+
 import { SearchProvider } from './components/SearchCreateContext.jsx'
 import AdminPage from './pages/AdminPage.jsx'
 import ToastedMessage from './components/ToastedMessage.jsx'
 import AdminSideMenu from './components/AdminSideMenu.jsx'
 import UserRegister from './pages/UserRegister.jsx'
 import ForgotPassword from './pages/ForgotPassword.jsx'
+import SearchResult from './pages/SearchResult.jsx';
 // import FileUpload from './components/FileUpload.jsx'
 // import Modals from './components/Modals.jsx'
 
@@ -23,11 +34,6 @@ createRoot(document.getElementById('root')).render(
   <SearchProvider>
     <BrowserRouter>
     
-       
-   
-
-      
-
     <Routes>
    
    <Route path="/" element={<Login/>} ></Route>

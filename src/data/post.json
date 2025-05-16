@@ -1,0 +1,58 @@
+[
+    {
+        "id" :"1",
+        "title" :"Sunrise",
+        "description" :" A beautiful sunrise over the mountains, with golden light spreading across the valley.",
+        "customerId":"1202",
+        "imgPath" :"feedLiveImg/sunsrise.jpeg",
+        "is_deleted" :false
+    },
+    {
+        "id" :"2",
+        "title" :"City Lights",
+        "description" :"Night skyline glowing with office lights, traffic, and neon signs.",
+        "customerId":"1202",
+        "imgPath" :"feedLiveImg/cityLight.jpg",
+        "is_deleted" :false
+    },
+    {
+        "id" :"3",
+        "title" :"Forest Path",
+        "description" :"A narrow walking trail through a lush green forest in early morning fog.",
+        "customerId":"1203",
+        "imgPath" :["feedLiveImg/forest path amazon.jpeg","feedLiveImg/forest path.jpeg"],
+        "is_deleted" :true
+    },
+    {
+        "id" :"4",
+        "title" :"Lazy Cat",
+        "description" :"This cat owns the couch now. Slept for hours in the same spot. Too cute to move.",
+        "customerId":"1203",
+        "imgPath" :"feedLiveImg/lazy cat.jpeg",
+        "is_deleted" :false
+    },
+    {
+        "id" :"5",
+        "title" :"Burger Shot",
+        "description" :"Juicy beef burger with crispy fries. One of the best meals I?ve had this month!",
+        "customerId":"1252",
+        "imgPath" :"feedLiveImg/burger shot.jpg",
+        "is_deleted" :false
+    },
+    {
+        "id" :"6",
+        "title" :"Snow Day",
+        "description" :"First snowfall of the season! Everything was white and peaceful?like a dream.",
+        "customerId":"1252",
+        "imgPath" :["feedLiveImg/snow falls.jpg","feedLiveImg/snow fall.jpeg"],
+        "is_deleted" :false
+    },
+    {
+        "id" :"7",
+        "title" :"Flower Bed",
+        "description" :"My garden?s in full bloom! Colors everywhere and the smell is just lovely.",
+        "customerId":"1252",
+        "imgPath" :"feedLiveImg/flower.jpeg",
+        "is_deleted" :false
+    }
+]

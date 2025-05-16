@@ -10,7 +10,6 @@ import { PiShareFat } from "react-icons/pi";
 const SearchResult = () => {
 
     const port = "http://localhost:8080/";
-
     const [results, setResults] = useState([]);
     const location = useLocation();
     const [query, setQuery] = useState("");
@@ -154,13 +153,7 @@ const SearchResult = () => {
 
                                 )
 
-                                // return < div >
-                                //   <h3>{d.title}</h3>
-                                //   <p>{d.description} </p>
-                                // </div >
-
-
-
+                               
                             }))
 
                     }

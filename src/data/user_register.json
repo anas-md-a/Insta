@@ -1,0 +1,47 @@
+[
+    {
+        "customerId" : "1202",
+        "email" : "melyssa2543@google.com",
+        "name" : "Melyssa",
+        "password" :"",
+        "phone":"0786812745",
+        "is_admin": false,
+        "is_deleted" : false
+    },
+    {
+        "customerId" : "1203",
+        "email" : "hop@google.com",
+        "name" : "Hop",
+        "password" :"",
+        "phone":"3529893454",
+        "is_admin": false,
+        "is_deleted" : false
+    },
+    {
+        "customerId" : "1204",
+        "email" : "vincent@google.com",
+        "name" : "Vincent",
+        "password" :"",
+        "phone":"",
+        "is_admin":"",
+        "is_deleted" :""
+    },
+    {
+        "customerId" : "",
+        "email" : "",
+        "name" : "",
+        "password" :"",
+        "phone":"",
+        "is_admin":"",
+        "is_deleted" :""
+    },
+    {
+        "customerId" : "",
+        "email" : "",
+        "name" : "",
+        "password" :"",
+        "phone":"",
+        "is_admin":"",
+        "is_deleted" :""
+    }
+]

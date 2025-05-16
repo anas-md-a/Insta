@@ -11,13 +11,16 @@ import { useSearch } from '../components/SearchCreateContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import ToastedMessage from '../components/ToastedMessage';
+import CreateComment from '../components/CreateComment';
+// import Demo from '../components/Demo';
 
 
-const LiveFeed = () => {
+const LiveFeed = ({commentCount  , show = true}) => {
 
   const port = "http://localhost:8080/";
   const customerId = localStorage.getItem('customerId');
 
+  
 
   const [post, setPost] = useState([])
   const [showMore, setShowMore] = useState(false);
@@ -33,7 +36,7 @@ const LiveFeed = () => {
     
 
     try {
-      const response = await fetch(`http://localhost:8080/fetchImg?customer_id=${customerId}`
+      const response = await fetch(`http://localhost:8080/fetchImg`
         , {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -81,7 +84,7 @@ const LiveFeed = () => {
         .catch((err) => console.error("Search failed", err));
         
         searchLength = results;
-        // console.log(searchLength);
+         console.log(searchLength);
         
     }else if ((searchQuery.length > 0) && (searchLength < 1)){
       setResults([])
@@ -91,7 +94,7 @@ const LiveFeed = () => {
   }, [searchQuery]);
 
 
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+const [showDeleteModal, setShowDeleteModal] = useState(false);
 const [deletePostId, setDeletePostId] = useState(null);
 
   const handleDelete = (id) => {
@@ -158,13 +161,86 @@ const [deletePostId, setDeletePostId] = useState(null);
     }));
   };
 
-  const [imgLeng, setImgLeng] = useState(0)
+  // const [imgLeng, setImgLeng] = useState(0)
 
+
+  const [likesCount, setLikesCount] = useState({});
+
+
+  const handleLikes = (d) =>{
+     axios
+        .post(`http://localhost:8080/likes?post_id=${d.id}&customer_id=${customerId}`)
+        .then((res) => {
+          console.log(res.data)
+          if(res.data.post_id === d.id){
+            setLikesCount((prev) =>({
+              ...prev,
+              [d.id] : res.data.likesCount,
+            }))
+          }
+        })
+        .catch((err) => console.error("likes error", err));
+        
+  }
+
+  // const getLikes = (post) =>{
+    
+  //     axios
+  //       .get(`http://localhost:8080/getlikes?post_id=${post.id}`)
+  //       .then((res) => {
+  //         if (res.data.post_id === post.id) {
+  //           console.log(res.data.post_id === post.id);
+            
+  //           setLikesCount((prev) => ({
+  //             ...prev,
+  //             [post.id]: res.data.likesCount,
+  //           }))
+  //         }
+  //       }).catch((error) => console.log("getLike error",error)
+  //       )
+  //   }
+  
+
+  // useEffect(() =>{
+  //   if(post && post.length>0){
+  //     post.forEach(getLikes)
+  //   }
+  // },[post])
 
  
+     useEffect(() =>{
+      post.map((d) => {
+        axios
+        .get(`http://localhost:8080/getlikes?post_id=${d.id}`)
+        .then((res) => {
+          if (res.data.post_id === d.id) {
+            console.log(res.data.post_id === d.id);
+            
+            setLikesCount((prev) => ({
+              ...prev,
+              [d.id]: res.data.likesCount,
+            }))
+          }
+        }).catch((error) => console.log("getLike error",error))
+      })
+    },[post])
 
+
+    // For Comment model
+    const [postId, setPostId] = useState();
+    const [showModel, setShowModel] = useState(false);
+    const handleClose = () => setShowModel(false);
+    const handleShow = (d) => 
+      {setShowModel(true)
+        setPostId(d.id);
+        
+      };
+
+ 
   return (
-    <>
+   <>
+   {show && (
+     <>
 
      
       {results.length === 0 ? (
@@ -217,8 +293,10 @@ const [deletePostId, setDeletePostId] = useState(null);
               <div style={bodyPadding}>
                  
                   <div>
-                    <button className="btn btn-transparent"><AiOutlineLike /></button>
-                    <button className="btn btn-transparent"><FaRegComment /></button>
+                    <button className="btn btn-transparent" 
+                    onClick={() => handleLikes(d)}><AiOutlineLike />{(likesCount[d.id] ?? d.likesCount) > 0 && (likesCount[d.id] ?? d.likesCount)}</button>
+                    <button className="btn btn-transparent"
+                    onClick={() => {handleShow(d)}}><FaRegComment />{commentCount}</button>
                     <button className="btn btn-transparent"><PiShareFat /></button>
                   </div>
                   <h6 className="mt-2 ">{d.title}</h6>
@@ -243,7 +321,7 @@ const [deletePostId, setDeletePostId] = useState(null);
                       )}
                       </p>
                       <div className="d-flex justify-content-end">
-                    <button className="btn btn-primary-transparent" onClick={() => handleDelete(d.id)}><MdDeleteOutline /></button>
+                    <button className="btn btn-primary-transparent" onClick={() => handleDelete(d)}><MdDeleteOutline /></button>
                   </div>
                 </div>
               </div>
@@ -262,8 +340,12 @@ const [deletePostId, setDeletePostId] = useState(null);
             
                    
                     <div>
-                      <button className="btn btn-transparent"><AiOutlineLike /></button>
-                      <button className="btn btn-transparent"><FaRegComment /></button>
+                      <button className="btn btn-transparent" 
+                      onClick={() => {
+                     handleLikes(d)}}
+                      ><AiOutlineLike />{(likesCount[d.id] ?? d.likesCount) > 0 && (likesCount[d.id] ?? d.likesCount)}</button>
+                      <button className="btn btn-transparent"
+                    onClick={() => {handleShow(d)}}><FaRegComment /></button>
                       <button className="btn btn-transparent"><PiShareFat /></button>
                     </div>
                     <h6 className="mt-2 mb-1">{d.title}</h6>
@@ -292,7 +374,7 @@ const [deletePostId, setDeletePostId] = useState(null);
                     <div className="d-flex justify-content-end">
                       <button
                         className="btn btn-primary-transparent"
-                        onClick={() => handleDelete(d.id)}
+                        onClick={() => handleDelete(d)}
                       >
                         <MdDeleteOutline />
                       </button>
@@ -469,10 +551,16 @@ const [deletePostId, setDeletePostId] = useState(null);
 </Modal>
 
 
+<CreateComment showModel={showModel} handleClose={handleClose} postId={postId} customerId={customerId}/>
+
 <ToastedMessage/>
+
+{/* <Demo /> */}
 
 
     </>
+   )}
+   </>
 
   );
 
